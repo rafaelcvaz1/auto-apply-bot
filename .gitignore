@@ -17,3 +17,12 @@ data/
 # OS
 .DS_Store
 Thumbs.db
+
+# Configurações privadas opcionais do radar
+config/search-profile.local.json
+config/search-sources.local.json
+
+# Perfil ativo e documentos privados: nunca versionar
+config/search-profile.json
+*.pdf
+private/

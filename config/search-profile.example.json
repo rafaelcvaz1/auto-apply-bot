@@ -1,0 +1,162 @@
+{
+  "schemaVersion": 1,
+  "education": {
+    "course": "Bacharelado em Estatística",
+    "institution": "Universidade (preencher localmente)",
+    "status": "em_conclusao",
+    "expectedGraduationYear": 2026
+  },
+  "experience": [
+    {
+      "organization": "Organização (preencher localmente)",
+      "role": "Atuação em análise de dados",
+      "relationship": "a_confirmar",
+      "start": "2023-06",
+      "end": null,
+      "activities": [
+        "Análise de bases e indicadores"
+      ]
+    }
+  ],
+  "skills": [
+    {
+      "name": "SQL",
+      "evidence": "declarado"
+    },
+    {
+      "name": "Python",
+      "evidence": "declarado"
+    },
+    {
+      "name": "Pandas",
+      "evidence": "declarado"
+    },
+    {
+      "name": "NumPy",
+      "evidence": "declarado"
+    },
+    {
+      "name": "Matplotlib",
+      "evidence": "declarado"
+    },
+    {
+      "name": "SciPy",
+      "evidence": "declarado"
+    },
+    {
+      "name": "Power BI",
+      "evidence": "declarado"
+    },
+    {
+      "name": "R",
+      "evidence": "declarado"
+    },
+    {
+      "name": "Excel",
+      "evidence": "declarado"
+    },
+    {
+      "name": "Word",
+      "evidence": "declarado"
+    },
+    {
+      "name": "PowerPoint",
+      "evidence": "declarado"
+    },
+    {
+      "name": "Microsoft Office",
+      "evidence": "declarado"
+    },
+    {
+      "name": "Estatística descritiva",
+      "evidence": "declarado"
+    },
+    {
+      "name": "Análise exploratória",
+      "evidence": "declarado"
+    },
+    {
+      "name": "Regressão",
+      "evidence": "declarado"
+    },
+    {
+      "name": "Modelagem estatística",
+      "evidence": "declarado"
+    },
+    {
+      "name": "Séries temporais",
+      "evidence": "declarado"
+    },
+    {
+      "name": "Tratamento de dados",
+      "evidence": "declarado"
+    },
+    {
+      "name": "Validação de dados",
+      "evidence": "declarado"
+    },
+    {
+      "name": "Relatórios",
+      "evidence": "declarado"
+    },
+    {
+      "name": "Dashboards",
+      "evidence": "declarado"
+    }
+  ],
+  "english": "avancado",
+  "roles": [
+    "Analista de Dados",
+    "Analista de BI",
+    "Analista de Indicadores",
+    "Analista de Informações Gerenciais",
+    "Analista de Reporting",
+    "Data Analyst",
+    "BI Analyst",
+    "Reporting Analyst",
+    "Analista de Qualidade de Dados",
+    "Data Quality Analyst",
+    "Automação de Relatórios",
+    "Estatístico",
+    "Statistician",
+    "Analista de Pesquisa",
+    "Research Analyst",
+    "Monitoramento e Avaliação",
+    "Monitoring and Evaluation Analyst",
+    "Analista de Inteligência de Mercado",
+    "Market Intelligence Analyst",
+    "Analista de Planejamento",
+    "Analista de Operações",
+    "Operations Analyst",
+    "Assistente de Dados",
+    "Data Assistant",
+    "Trainee de Dados",
+    "Estágio em Dados",
+    "Cientista de Dados Júnior",
+    "Junior Data Scientist"
+  ],
+  "preferences": {
+    "remoteCountry": "BR",
+    "onsiteCities": [
+      "Belém",
+      "Ananindeua",
+      "Marituba",
+      "Benevides",
+      "Santa Bárbara do Pará",
+      "Santa Izabel do Pará",
+      "Castanhal",
+      "Barcarena"
+    ],
+    "state": "PA",
+    "seniority": [
+      "junior",
+      "pleno",
+      "trainee",
+      "estagio"
+    ]
+  },
+  "professionalEvidence": [],
+  "toConfirm": [
+    "Personalizar o arquivo local com informações verificadas"
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "remotive": true,
+  "arbeitnow": true,
+  "gupyBoards": [
+    "equatorialenergia",
+    "amazoncred",
+    "unimedbelem",
+    "bancorbras",
+    "globalhitss",
+    "vempralanlink",
+    "grupoboticario"
+  ],
+  "maxJobsPerSource": 500,
+  "timeoutMs": 20000,
+  "greenhouseBoards": [
+    "nubank"
+  ],
+  "maxDetailsPerSource": 20
+}

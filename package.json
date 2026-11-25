@@ -1,23 +1,22 @@
 {
   "name": "auto-apply-bot",
   "version": "1.0.0",
-  "description": "Agente inteligente de candidatura automatica a vagas de emprego",
+  "description": "Busca e revisão local de oportunidades em Dados e Estatística",
   "type": "module",
   "scripts": {
-    "start": "tsx src/index.ts",
-    "dev": "tsx watch src/index.ts",
-    "resultado": "tsx src/marcar-resultado.ts",
-    "chrome": "google-chrome --remote-debugging-port=9222",
+    "start": "node --use-env-proxy --import tsx src/index.ts",
+    "dev": "node --use-env-proxy --import tsx --watch src/index.ts",
+    "collect": "node --use-env-proxy --import tsx src/discovery/collect-cli.ts",
     "test": "vitest",
     "test:run": "vitest run",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@google/genai": "^1.0.0",
-    "@modelcontextprotocol/sdk": "^1.0.0",
-    "better-sqlite3": "^11.0.0",
+    "@modelcontextprotocol/sdk": "1.32.2",
+    "better-sqlite3": "13.2.0",
     "dotenv": "^16.4.0",
-    "nodemailer": "^7.0.13"
+    "nodemailer": "10.6.1"
   },
   "devDependencies": {
     "@types/better-sqlite3": "^7.6.0",
@@ -25,5 +24,8 @@
     "tsx": "^4.19.0",
     "typescript": "^5.6.0",
     "vitest": "^4.1.9"
+  },
+  "engines": {
+    "node": ">=24.5.0 <25"
   }
 }
