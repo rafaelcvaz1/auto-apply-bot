@@ -26,3 +26,6 @@ config/search-sources.local.json
 config/search-profile.json
 *.pdf
 private/
+
+# Respostas pessoais e simulações
+config/*.local.json

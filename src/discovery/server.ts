@@ -6,6 +6,7 @@ import { loadProfile,loadSources,profileVersion } from './config.js';
 import { Store } from './store.js';
 import { searchLinks } from './queries.js';
 import { collect } from './sources.js';
+import { loadAnswers,simulateBatch,type Answers } from '../applications/simulation.js';
 import type { Profile } from './model.js';
 const html=readFileSync(fileURLToPath(new URL('./ui.html',import.meta.url)),'utf8');
 async function body(req: http.IncomingMessage): Promise<any> {
@@ -14,7 +15,7 @@ async function body(req: http.IncomingMessage): Promise<any> {
   return JSON.parse(Buffer.concat(parts).toString('utf8'));
 }
 function csvCell(v: unknown): string {let s=String(v??'');if(/^[\s]*[=+@\-]/.test(s))s="'"+s;return '"'+s.replaceAll('"','""')+'"';}
-export function createSearchServer(store: Store, initial: Profile, reload: ()=>Profile=loadProfile) {
+export function createSearchServer(store: Store, initial: Profile, reload: ()=>Profile=loadProfile, answersLoader:()=>Answers=loadAnswers) {
   const token=randomBytes(32).toString('hex');let profile=initial;let collecting=false;
   return http.createServer(async(req,res)=>{
     const address=res.socket?.localPort; const hosts=[`127.0.0.1:${address}`,`localhost:${address}`];
@@ -42,6 +43,7 @@ export function createSearchServer(store: Store, initial: Profile, reload: ()=>P
       }
       if(url.pathname==='/api/reassess'){const next=reload();const count=store.reassess(next);profile=next;send(200,{count});return;}
       const data=await body(req);
+      if(url.pathname==='/api/simulate'){if(data.mode!==undefined&&data.mode!=='simulation')throw new Error('Somente simulação local disponível');send(200,simulateBatch(store,profile,answersLoader()));return;}
       if(url.pathname==='/api/import'){if(!Array.isArray(data))throw new Error('Envie uma lista JSON');send(200,{processed:store.import(data,profile)});return;}
       if(url.pathname==='/api/review'){if(!Number.isSafeInteger(data.id)||data.id<1)throw new Error('ID inválido');send(store.review(data.id,data.state,data.notes)?200:404,{ok:true});return;}
       send(404,{error:'Rota inexistente'});

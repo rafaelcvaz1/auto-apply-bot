@@ -94,3 +94,11 @@ npm run collect
 ```
 
 Os testes de rede das fontes usam respostas controladas para validar tratamento de erros; a coleta real é uma validação separada e seus resultados ficam no banco local. Não introduz dados demonstrativos no painel. O teste legado do SDK de Gemini permanece separado da aplicação ativa; não são necessárias chaves de Gemini para o painel ou a coleta.
+
+## Regras de candidatura e simulação
+
+`applicationRules` no perfil **privado** define contratos, exclusão de estágios (também históricos), origem brasileira, trabalho remoto integral, localização, salário CLT, benefícios e disponibilidade. Salário/benefícios omitidos não geram impedimento; exclusão explícita de benefício esperado exige revisão. Empresa com origem incerta exige revisão, sem presumir nacionalidade pela plataforma ou pelo endereço da vaga. Requisitos obrigatórios incompatíveis com informações confirmadas geram impedimento. Essas regras são reavaliadas sem apagar registros ou notas.
+
+A graduação distingue situação atual (Cursando), previsão de término das atividades acadêmicas e previsão de colação. Interesses de desenvolvimento ficam separados das competências. Os vínculos profissionais permanecem separados, inclusive quando há transição no mesmo mês.
+
+Use `npm run simulate` ou o botão **Simular planejamento local**. Preenchimento apenas local, pendências, prevenção de duplicatas e prévia de e-mail estão descritos em [Simulação de candidaturas](docs/simulacao-candidaturas.md). Nenhum envio real pode ser ativado nesta versão; as APIs de envio consultadas requerem credenciamento organizacional/parceiro que não foi confirmado para esta conta de candidato.

@@ -3,6 +3,7 @@ import { normalize } from './model.js';
 import { profileVersion } from './config.js';
 import { jobFindings } from './evidence.js';
 import { plain } from './text.js';
+import { policyFindings } from './policy.js';
 const aliases: Record<string,string[]> = {
  'sql':['sql'], 'r':['r','r language','r programming'], 'python':['python'],
  'power bi':['power bi','powerbi'], 'excel':['excel'], 'estatistica descritiva':['estatistica descritiva','descriptive statistics'],
@@ -34,7 +35,8 @@ export function assess(job: Job, p: Profile, now = new Date()): Assessment {
   const text = normalize(job.title+' '+plain(job.description));
   const findings=jobFindings(job,p);
   const mode=findings.mode, region=findings.region;
-  gaps.push(...findings.gaps);uncertainties.push(...findings.uncertainties);
+  const policy=policyFindings(job,p,mode);
+  gaps.push(...findings.gaps,...policy.gaps);uncertainties.push(...findings.uncertainties,...policy.uncertainties);
   if (relevantRole(job.title,p,job.description)) {score+=35; reasons.push('Cargo alinhado aos interesses declarados');} else gaps.push('Cargo fora dos interesses declarados');
   if(mode==='remoto') {
     if((region==='BR'||region==='global') && !findings.gaps.length){score+=15;reasons.push('Remoto com evidência de elegibilidade para Brasil');}
@@ -46,11 +48,11 @@ export function assess(job: Job, p: Profile, now = new Date()): Assessment {
   const matches=p.skills.filter(s=>(aliases[normalize(s.name)] ?? [normalize(s.name)]).some(a=>hasTerm(text,a))).map(s=>s.name);
   score+=Math.min(25,matches.length*5); if(matches.length) reasons.push('Competências citadas: '+matches.join(', '));
   else uncertainties.push('Nenhuma competência declarada identificada no anúncio');
-  if(p.preferences.seniority.includes(job.seniority)) {score+=10;reasons.push('Senioridade priorizada: '+job.seniority);} else if(job.seniority==='senior') uncertainties.push('Senioridade acima da prioridade júnior/pleno'); else uncertainties.push('Senioridade não informada');
+  if(p.preferences.seniority.includes(job.seniority)) {score+=10;reasons.push('Senioridade priorizada: '+job.seniority);} else if(job.seniority==='senior') uncertainties.push('Senioridade acima da prioridade júnior/pleno'); else if(job.seniority==='desconhecida') uncertainties.push('Senioridade não informada'); else if(!(job.seniority==='estagio'&&p.applicationRules?.excludeInternships)) uncertainties.push('Senioridade fora das prioridades atuais: '+job.seniority);
   const degree=findings.degree;
   if(job.requiresCompletedDegree === undefined && !degree) uncertainties.push('Exigência de graduação concluída não confirmada');
-  if(degree) gaps.push('Exige graduação concluída; perfil informa curso em conclusão'); else reasons.push(`Formação declarada: ${p.education.course}/${p.education.institution} em andamento (previsão ${p.education.expectedGraduationYear})`);
-  if(job.seniority==='estagio') uncertainties.push('Confirmar matrícula ativa, semestre, jornada e prazo até formatura');
+  if(degree) gaps.push('Exige graduação concluída; perfil informa curso em conclusão'); else reasons.push(`Formação declarada: ${p.education.course}/${p.education.institution}: Cursando; atividades acadêmicas ${p.education.expectedAcademicCompletionYear??'a confirmar'}, colação prevista ${p.education.expectedGraduationYear}`);
+  if(job.seniority==='estagio'&&!p.applicationRules?.excludeInternships) uncertainties.push('Confirmar matrícula ativa, semestre, jornada e prazo até formatura');
   if(job.seniority==='trainee') uncertainties.push('Confirmar janela de conclusão exigida pelo programa');
   // Merge overlapping experience intervals; academic work is never added as employment.
   const intervals=p.experience.map(e=>[Date.parse(e.start+'-01'), Math.min(now.getTime(),e.end?Date.parse(e.end+'-01'):now.getTime())]).filter(([a,b])=>a<=b).sort((a,b)=>a[0]-b[0]);
@@ -76,5 +78,5 @@ export function assess(job: Job, p: Profile, now = new Date()): Assessment {
   if(!job.publishedAt) uncertainties.push('Data de publicação desconhecida');
   // Missing extraction never silently becomes an eligibility confirmation.
   const needsReview=uncertainties.some(s=>!/Data de publicacao|Data de publicação/.test(s));
-  return {evidence:findings.evidence,score:Math.max(0,Math.min(100,score)),eligibility:gaps.length?'incompativel':needsReview?'revisar':'compativel', reasons,gaps,uncertainties,profileVersion:profileVersion(p),evaluatedAt:now.toISOString()};
+  return {evidence:[...findings.evidence,...policy.evidence??[]],score:Math.max(0,Math.min(100,score)),eligibility:gaps.length?'incompativel':needsReview?'revisar':'compativel', reasons,gaps,uncertainties,profileVersion:profileVersion(p),evaluatedAt:now.toISOString()};
 }
