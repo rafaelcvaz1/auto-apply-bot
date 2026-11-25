@@ -102,3 +102,5 @@ Os testes de rede das fontes usam respostas controladas para validar tratamento 
 A graduação distingue situação atual (Cursando), previsão de término das atividades acadêmicas e previsão de colação. Interesses de desenvolvimento ficam separados das competências. Os vínculos profissionais permanecem separados, inclusive quando há transição no mesmo mês.
 
 Use `npm run simulate` ou o botão **Simular planejamento local**. Preenchimento apenas local, pendências, prevenção de duplicatas e prévia de e-mail estão descritos em [Simulação de candidaturas](docs/simulacao-candidaturas.md). Nenhum envio real pode ser ativado nesta versão; as APIs de envio consultadas requerem credenciamento organizacional/parceiro que não foi confirmado para esta conta de candidato.
+
+Para executar coleta e planejamento em um único comando, use `npm run radar`. Consulte [Ciclo de busca e candidaturas](docs/automacao-de-vagas.md) para o relatório e o prompt reutilizável.

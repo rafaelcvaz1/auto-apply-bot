@@ -10,7 +10,8 @@
     "test": "vitest",
     "test:run": "vitest run",
     "typecheck": "tsc --noEmit",
-    "simulate": "node --import tsx src/applications/simulate-cli.ts"
+    "simulate": "node --import tsx src/applications/simulate-cli.ts",
+    "radar": "node scripts/radar.mjs"
   },
   "dependencies": {
     "@google/genai": "^1.0.0",
